@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bookstoreModelStoreContainer" CdmEntityContainer="bookstoreEntities">
+    <EntitySetMapping Name="KhachHang">
+      <EntityTypeMapping TypeName="bookstoreModel.KhachHang">
+        <MappingFragment StoreEntitySet="KhachHang">
+          <ScalarProperty Name="maKhachHang" ColumnName="maKhachHang" />
+          <ScalarProperty Name="tenKhachHang" ColumnName="tenKhachHang" />
+          <ScalarProperty Name="diaChi" ColumnName="diaChi" />
+          <ScalarProperty Name="soDienThoai" ColumnName="soDienThoai" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="matKhau" ColumnName="matKhau" />
+          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NoiDungSach">
+      <EntityTypeMapping TypeName="bookstoreModel.NoiDungSach">
+        <MappingFragment StoreEntitySet="NoiDungSach">
+          <ScalarProperty Name="maSach" ColumnName="maSach" />
+          <ScalarProperty Name="noiDung" ColumnName="noiDung" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order">
+      <EntityTypeMapping TypeName="bookstoreModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedOnUtc" ColumnName="CreatedOnUtc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetail">
+      <EntityTypeMapping TypeName="bookstoreModel.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetail">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sach">
+      <EntityTypeMapping TypeName="bookstoreModel.Sach">
+        <MappingFragment StoreEntitySet="Sach">
+          <ScalarProperty Name="maSach" ColumnName="maSach" />
+          <ScalarProperty Name="tenSach" ColumnName="tenSach" />
+          <ScalarProperty Name="tacGia" ColumnName="tacGia" />
+          <ScalarProperty Name="maTheLoai" ColumnName="maTheLoai" />
+          <ScalarProperty Name="hinhThucBia" ColumnName="hinhThucBia" />
+          <ScalarProperty Name="soTrang" ColumnName="soTrang" />
+          <ScalarProperty Name="giaSach" ColumnName="giaSach" />
+          <ScalarProperty Name="nhaXuatBan" ColumnName="nhaXuatBan" />
+          <ScalarProperty Name="ngayXuatBan" ColumnName="ngayXuatBan" />
+          <ScalarProperty Name="khuyenMai" ColumnName="khuyenMai" />
+          <ScalarProperty Name="tenAnh" ColumnName="tenAnh" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TheLoaiCon">
+      <EntityTypeMapping TypeName="bookstoreModel.TheLoaiCon">
+        <MappingFragment StoreEntitySet="TheLoaiCon">
+          <ScalarProperty Name="maTheLoaiCon" ColumnName="maTheLoaiCon" />
+          <ScalarProperty Name="tenTheLoaiCon" ColumnName="tenTheLoaiCon" />
+          <ScalarProperty Name="maTheLoaiGoc" ColumnName="maTheLoaiGoc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TheLoaiGoc">
+      <EntityTypeMapping TypeName="bookstoreModel.TheLoaiGoc">
+        <MappingFragment StoreEntitySet="TheLoaiGoc">
+          <ScalarProperty Name="maTheLoai" ColumnName="maTheLoai" />
+          <ScalarProperty Name="tenTheLoaiGoc" ColumnName="tenTheLoaiGoc" />
+          <ScalarProperty Name="tenAnh" ColumnName="tenAnh" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

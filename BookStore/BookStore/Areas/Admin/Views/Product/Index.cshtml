@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BookStore.Context.Sach>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tenSach)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tacGia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.giaSach)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.khuyenMai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tenAnh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TheLoaiCon.tenTheLoaiCon)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tenSach)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tacGia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.giaSach)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.khuyenMai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tenAnh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TheLoaiCon.tenTheLoaiCon)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.maSach }) |
+            @Html.ActionLink("Details", "Details", new { id=item.maSach }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.maSach })
+        </td>
+    </tr>
+}
+
+</table>

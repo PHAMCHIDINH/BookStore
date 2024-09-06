@@ -1,0 +1,106 @@
+﻿@model BookStore.Context.Sach
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Sach</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tenSach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenSach)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tacGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tacGia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hinhThucBia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hinhThucBia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.soTrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soTrang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.giaSach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.giaSach)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nhaXuatBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nhaXuatBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngayXuatBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngayXuatBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.khuyenMai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khuyenMai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tenAnh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenAnh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiDungSach.noiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoiDungSach.noiDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TheLoaiCon.tenTheLoaiCon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheLoaiCon.tenTheLoaiCon)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.maSach }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

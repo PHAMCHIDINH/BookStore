@@ -1,0 +1,181 @@
+﻿@model BookStore.Models.HomeModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#addtocart").click(function () {
+            var model = {};
+
+            // Lấy id sản phẩm từ thuộc tính data của nút "Thêm vào giỏ hàng"
+            model.Id = $(this).data('productid');
+            console.log("model.Id:", model.Id); // Thêm dòng này để kiểm tra giá trị
+            // Lấy số lượng đặt hàng
+            model.Quantity = $("#ipQuantity").val();
+            debugger;
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart", "Cart")',
+                data: JSON.stringify(model),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    alert("Thêm giỏ hàng thành công!");
+
+                    // Cập nhật số lượng giỏ hàng trên giao diện
+                    $('#CartCount').text(parseInt($('#CartCount').text()) + 1);
+                },
+                error: function () {
+                    alert("Lỗi trong khi thêm vào giỏ hàng!");
+                }
+            });
+
+            return false;
+        });
+    });
+</script>
+
+
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content bg-white padding-y">
+    <div class="container">
+
+        <!-- ============================ ITEM DETAIL ======================== -->
+
+        <div class="row">
+            @foreach (var item in Model.ListProduct)
+            {
+                <div class="col-md-12 mb-4">
+                    <div class="row">
+                        <aside class="col-md-6">
+                            <div class="card">
+                                <article class="gallery-wrap">
+                                    <div class="img-big-wrap">
+                                        <div>
+                                            <a href="#"><img src="~/content/images/items/@item.tenAnh" alt="@item.tenSach"></a>
+                                        </div>
+                                    </div> <!-- slider-product.// -->
+                                </article> <!-- gallery-wrap .end// -->
+                            </div> <!-- card.// -->
+                        </aside>
+
+                        <main class="col-md-6">
+                            <article class="product-info-aside">
+                                <h2 class="title mt-3">@item.tenSach</h2>
+                                <div class="rating-wrap my-3">
+                                    <ul class="rating-stars">
+                                        <li style="width:80%" class="stars-active">
+                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </li>
+                                    </ul>
+                                </div> <!-- rating-wrap.// -->
+
+                                <div class="mb-3">
+                                    @{
+                                        float gia;
+                                        if (item.khuyenMai == null)
+                                        {
+                                            gia = (float)item.giaSach;
+                                        }
+                                        else
+                                        {
+                                            gia = (float)(item.giaSach * (100 - item.khuyenMai)) / 100;
+                                        }
+                                    }
+                                    <var class="price h4">@((int)gia),000 VND</var>
+
+                                    @if (item.khuyenMai != null)
+                                    {
+                                        <span class="text-muted"><strike>@item.giaSach VND</strike></span>
+                                    }
+                                </div>
+
+                                <p>
+                                    @if (item.NoiDungSach != null)
+                                    {
+                                        @Html.Raw(item.NoiDungSach.noiDung)
+                                    }
+                                    else
+                                    {
+                                        <span>Chưa có nội dung hiển thị</span>
+                                    }
+                                </p>
+
+                                <dl class="row">
+                                    <dt class="col-sm-3">Tác Giả</dt>
+                                    <dd class="col-sm-9"><a href="#">@item.tacGia</a></dd>
+
+                                    <dt class="col-sm-3"> Thể Loại</dt>
+                                    <dd class="col-sm-9">@item.TheLoaiCon.tenTheLoaiCon</dd>
+
+                                    <dt class="col-sm-3">Năm Xuất Bản</dt>
+                                    <dd class="col-sm-9">@item.ngayXuatBan</dd>
+                                </dl>
+
+                                <div class="form-row mt-4">
+                                    <div class="form-group col-md flex-grow-0">
+                                        <div class="input-group mb-3 input-spinner">
+                                            <input type="text" id="ipQuantity" class="form-control" value="1">
+                                        </div>
+                                    </div> <!-- col.// -->
+                                    <a href="#" id="addtocart" class="btn btn-primary" data-productid="@item.maSach">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span class="text">Thêm vào giỏ hàng</span>
+                                    </a>
+                                </div>
+                            </article> <!-- product-info-aside .// -->
+                        </main> <!-- col.// -->
+                    </div> <!-- row inside .// -->
+                </div> <!-- col-md-12 mb-4 .// -->
+            }
+        </div> <!-- row.// -->
+        <!-- ================ ITEM DETAIL END .// ================= -->
+    </div> <!-- container .//  -->
+</section>
+
+<!-- ========================= SECTION CONTENT END// ========================= -->
+@foreach (var item in Model.ListProduct)
+{
+    <!-- ========================= SECTION  ========================= -->
+    <section class="section-name padding-y bg">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="title-description">Thông Tin Sản Phẩm</h5>
+                    <table class="table table-bordered">
+                        <tr> <td>Thể Loại	</td><td>@item.TheLoaiCon.tenTheLoaiCon</td> </tr>
+                        <tr> <td>Tác Giả</td><td>@item.tacGia</td> </tr>
+                        <tr> <td>Nhà Xuất Bản</td><td>@item.nhaXuatBan</td> </tr>
+                        <tr> <td>Năm Xuất Bản</td> <td> @item.ngayXuatBan </td></tr>
+                        <tr> <td>Số Trang</td><td>@item.soTrang</td> </tr>
+                        <tr> <td>Hình Thức</td><td>@item.hinhThucBia</td> </tr>
+
+
+
+
+
+                    </table>
+                </div> <!-- col.// -->
+
+
+            </div> <!-- row.// -->
+
+        </div> <!-- container .//  -->
+    </section>
+}
+<!-- ========================= SECTION CONTENT END// ========================= -->

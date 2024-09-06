@@ -1,0 +1,38 @@
+﻿@model BookStore.Models.HomeModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+
+        <nav class="row">
+            @foreach (var item in Model.ListTheLoaiGoc.Take(5))
+            {
+                <div class="col-md-3">
+                    <div class="card card-category">
+                        <div class="img-wrap content">
+                            <img src="~/Content/images/items/@item.tenAnh">
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title"><a>@Html.ActionLink(item.tenTheLoaiGoc, "ProductCategory", "Category", new { @id = item.maTheLoai }, null)</a></h4>
+                            <ul class="list-menu">
+                                @foreach (var item2 in Model.ListTheLoai.Where(n=>n.maTheLoaiGoc==item.maTheLoai).Take(5))
+                                {
+                                    <li>@Html.ActionLink(item2.tenTheLoaiCon, "ProductCategory", "Category", new { @id = item2.maTheLoaiCon }, null)</li>
+                                    
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                </div> <!-- col.// -->
+            }
+        </nav> <!-- row.// -->
+
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->

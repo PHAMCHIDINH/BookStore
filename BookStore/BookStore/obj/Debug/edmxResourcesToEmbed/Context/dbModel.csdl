@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bookstoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="KhachHang">
+    <Key>
+      <PropertyRef Name="maKhachHang" />
+    </Key>
+    <Property Name="maKhachHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tenKhachHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="diaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="soDienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="matKhau" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="isAdmin" Type="Byte" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_Order_UserId" FromRole="KhachHang" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="NoiDungSach">
+    <Key>
+      <PropertyRef Name="maSach" />
+    </Key>
+    <Property Name="maSach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="noiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Sach" Relationship="Self.FK__NoiDungSa__maSac__4316F928" FromRole="NoiDungSach" ToRole="Sach" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="CreatedOnUtc" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="KhachHang" Relationship="Self.FK_Order_UserId" FromRole="Order" ToRole="KhachHang" />
+    <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_OrderId" FromRole="Order" ToRole="OrderDetail" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="ProductID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Int32" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_OrderId" FromRole="OrderDetail" ToRole="Order" />
+    <NavigationProperty Name="Sach" Relationship="Self.FK_OrderDetail_ProductID" FromRole="OrderDetail" ToRole="Sach" />
+  </EntityType>
+  <EntityType Name="Sach">
+    <Key>
+      <PropertyRef Name="maSach" />
+    </Key>
+    <Property Name="maSach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="tenSach" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tacGia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="maTheLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="hinhThucBia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="soTrang" Type="Int32" />
+    <Property Name="giaSach" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="nhaXuatBan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ngayXuatBan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="khuyenMai" Type="Int32" />
+    <Property Name="tenAnh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NoiDungSach" Relationship="Self.FK__NoiDungSa__maSac__4316F928" FromRole="Sach" ToRole="NoiDungSach" />
+    <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_ProductID" FromRole="Sach" ToRole="OrderDetail" />
+    <NavigationProperty Name="TheLoaiCon" Relationship="Self.FK__Sach__maTheLoai__46E78A0C" FromRole="Sach" ToRole="TheLoaiCon" />
+  </EntityType>
+  <EntityType Name="TheLoaiCon">
+    <Key>
+      <PropertyRef Name="maTheLoaiCon" />
+    </Key>
+    <Property Name="maTheLoaiCon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="tenTheLoaiCon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="maTheLoaiGoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Sach" Relationship="Self.FK__Sach__maTheLoai__46E78A0C" FromRole="TheLoaiCon" ToRole="Sach" />
+    <NavigationProperty Name="TheLoaiGoc" Relationship="Self.FK__TheLoaiCo__maThe__47DBAE45" FromRole="TheLoaiCon" ToRole="TheLoaiGoc" />
+  </EntityType>
+  <EntityType Name="TheLoaiGoc">
+    <Key>
+      <PropertyRef Name="maTheLoai" />
+    </Key>
+    <Property Name="maTheLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="tenTheLoaiGoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="tenAnh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TheLoaiCon" Relationship="Self.FK__TheLoaiCo__maThe__47DBAE45" FromRole="TheLoaiGoc" ToRole="TheLoaiCon" />
+  </EntityType>
+  <Association Name="FK_Order_UserId">
+    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="maKhachHang" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NoiDungSa__maSac__4316F928">
+    <End Role="Sach" Type="Self.Sach" Multiplicity="1" />
+    <End Role="NoiDungSach" Type="Self.NoiDungSach" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Sach">
+        <PropertyRef Name="maSach" />
+      </Principal>
+      <Dependent Role="NoiDungSach">
+        <PropertyRef Name="maSach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_OrderId">
+    <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_ProductID">
+    <End Role="Sach" Type="Self.Sach" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sach">
+        <PropertyRef Name="maSach" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sach__maTheLoai__46E78A0C">
+    <End Role="TheLoaiCon" Type="Self.TheLoaiCon" Multiplicity="0..1" />
+    <End Role="Sach" Type="Self.Sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TheLoaiCon">
+        <PropertyRef Name="maTheLoaiCon" />
+      </Principal>
+      <Dependent Role="Sach">
+        <PropertyRef Name="maTheLoai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TheLoaiCo__maThe__47DBAE45">
+    <End Role="TheLoaiGoc" Type="Self.TheLoaiGoc" Multiplicity="0..1" />
+    <End Role="TheLoaiCon" Type="Self.TheLoaiCon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TheLoaiGoc">
+        <PropertyRef Name="maTheLoai" />
+      </Principal>
+      <Dependent Role="TheLoaiCon">
+        <PropertyRef Name="maTheLoaiGoc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="bookstoreEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="KhachHang" EntityType="Self.KhachHang" />
+    <EntitySet Name="NoiDungSach" EntityType="Self.NoiDungSach" />
+    <EntitySet Name="Order" EntityType="Self.Order" />
+    <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" />
+    <EntitySet Name="Sach" EntityType="Self.Sach" />
+    <EntitySet Name="TheLoaiCon" EntityType="Self.TheLoaiCon" />
+    <EntitySet Name="TheLoaiGoc" EntityType="Self.TheLoaiGoc" />
+    <AssociationSet Name="FK_Order_UserId" Association="Self.FK_Order_UserId">
+      <End Role="KhachHang" EntitySet="KhachHang" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NoiDungSa__maSac__4316F928" Association="Self.FK__NoiDungSa__maSac__4316F928">
+      <End Role="Sach" EntitySet="Sach" />
+      <End Role="NoiDungSach" EntitySet="NoiDungSach" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_OrderId" Association="Self.FK_OrderDetail_OrderId">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_ProductID" Association="Self.FK_OrderDetail_ProductID">
+      <End Role="Sach" EntitySet="Sach" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sach__maTheLoai__46E78A0C" Association="Self.FK__Sach__maTheLoai__46E78A0C">
+      <End Role="TheLoaiCon" EntitySet="TheLoaiCon" />
+      <End Role="Sach" EntitySet="Sach" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TheLoaiCo__maThe__47DBAE45" Association="Self.FK__TheLoaiCo__maThe__47DBAE45">
+      <End Role="TheLoaiGoc" EntitySet="TheLoaiGoc" />
+      <End Role="TheLoaiCon" EntitySet="TheLoaiCon" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
